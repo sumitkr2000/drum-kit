@@ -1,21 +1,20 @@
 //Detecting button press
 
-var num = document.querySelectorAll(".drum").length
+var len = document.querySelectorAll(".drum").length;
 
-for(var i = 0; i < num; i++) {
-    document.querySelectorAll("button")[i].addEventListener("click", gotClicked);
+for(var i = 0; i < len; i++) {
+    document.querySelectorAll("button")[i].addEventListener("click", function() {
+        var drumInnerHTML = this.innerHTML;
+        makeSound(drumInnerHTML);
+        buttonAnimation(drumInnerHTML);
+    });
 }
 
-function gotClicked() {
-    var drumInnerHTML = this.innerHTML;
-    makeSound(drumInnerHTML);
-    buttonAnimation(drumInnerHTML);
-}
+
 
 //Detecting key press
 
 document.addEventListener("keydown", function(event) {
-
     makeSound(event.key);
     buttonAnimation(event.key);
 });
@@ -66,7 +65,6 @@ function makeSound(key) {
 function buttonAnimation(currentKey) {
     
     var activeButton = document.querySelector("." + currentKey);
-
     activeButton.classList.add("pressed");
 
     setTimeout(function() {
